@@ -49,7 +49,7 @@ Run this to get a feel for the output format:
 python EffectorP.py -i Effectors.fasta
 -----------------
 
-EffectorP 3.0 is running for 10 proteins given in FASTA file Effectors.fasta
+EffectorP 3.0 is running for 9 proteins given in FASTA file Effectors.fasta
 
 Ensemble classification
 25 percent done...
@@ -57,29 +57,29 @@ Ensemble classification
 75 percent done...
 All done.
 
-# Identifier                                                                    Cytoplasmic effector    Apoplastic effector     Non-effector            Prediction
-AvrM Melampsora lini                                                            Y (1.0)                 -                       -                       Cytoplasmic effector
-Avr1-CO39 Magnaporthe oryzae                                                    Y (0.945)               Y (0.667)               -                       Cytoplasmic/apoplastic effector
-ToxA Parastagonospora nodorum                                                   Y (0.551)               Y (0.767)               -                       Apoplastic/cytoplasmic effector
-AVR3a Phytophthora infestans                                                    Y (0.985)               -                       -                       Cytoplasmic effector
-Pit2 Ustilago maydis                                                            Y (0.779)               -                       -                       Cytoplasmic effector
-Zt6 Zymoseptoria tritici                                                        -                       Y (0.944)               -                       Apoplastic effector
-INF1 Phytophthora infestans                                                     -                       Y (0.837)               -                       Apoplastic effector
-Zinc transporter 3 Arabidopsis thaliana                                         -                       -                       Y (0.737)               Non-effector
-Phosphatidylinositol N-acetylglucosaminyltransferase subunit Homo sapiens       -                       -                       Y (0.669)               Non-effector
-GPI-anchored protein 13 Candida albicans                                        -                       -                       Y (0.708)               Non-effector
+# Identifier                                    Cytoplasmic effector    Apoplastic effector     Non-effector            Prediction
+AvrM Melampsora lini                            Y (1.0)                 -                       -                       Cytoplasmic effector
+Avr1-CO39 Magnaporthe oryzae                    Y (0.945)               Y (0.667)               -                       Cytoplasmic/apoplastic effector
+ToxA Parastagonospora nodorum                   Y (0.551)               Y (0.767)               -                       Apoplastic/cytoplasmic effector
+AVR3a Phytophthora infestans                    Y (0.985)               -                       -                       Cytoplasmic effector
+Pit2 Ustilago maydis                            Y (0.779)               -                       -                       Cytoplasmic effector
+Zt6 Zymoseptoria tritici                        -                       Y (0.944)               -                       Apoplastic effector
+INF1 Phytophthora infestans                     -                       Y (0.837)               -                       Apoplastic effector
+Zinc transporter 3 Arabidopsis thaliana         -                       -                       Y (0.737)               Non-effector
+GPI-anchored protein 13 Candida albicans        -                       -                       Y (0.708)               Non-effector
 
 -----------------
-10 proteins were provided as input in the following file: Effectors.fasta
+9 proteins were provided as input in the following file: Effectors.fasta
 -----------------
 Number of predicted effectors: 7
 Number of predicted cytoplasmic effectors: 4
 Number of predicted apoplastic effectors: 3
 -----------------
-70.0 percent are predicted effectors.
-40.0 percent are predicted cytoplasmic effectors.
-30.0 percent are predicted apoplastic effectors.
+77.8 percent are predicted effectors.
+44.4 percent are predicted cytoplasmic effectors.
+33.3 percent are predicted apoplastic effectors.
 -----------------
+
 
 ```
 
