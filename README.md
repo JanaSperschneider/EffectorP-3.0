@@ -79,15 +79,17 @@ Number of predicted apoplastic effectors: 3
 44.4 percent are predicted cytoplasmic effectors.
 33.3 percent are predicted apoplastic effectors.
 -----------------
-
-
 ```
 
-EffectorP will return the output as shown in the example above. A summary table will be shown which shows the predictions (effector or non-effector) for each submitted protein.
+EffectorP will return the output as shown in the example above. A summary table will be shown which shows the predictions for each submitted protein.
+For each protein, its most likely localization (apoplastic or cytoplasmic) will be returned, with an associated probability.
 
-For a predicted effector, its most likely localization (apoplastic or cytoplasmic) will be returned, with an associated probability.
+In the above example, four proteins are predicted as cytoplasmic effectors and three as apoplastic effectors. 
+The Avr1-CO39 protein is predicted as a cytoplasmic effector (probability: 0.945), but also has a weaker prediction as an apoplastic effector (probability: 0.667). 
+The ToxA protein is predicted as an apoplastic effector (probability: 0.767), but also has a weaker prediction as a cytoplasmic effector (probability: 0.551).
+We included two non-effectors to illustrate the output format. 
 
-As a probabilistic classifier (Naive Bayes), EffectorP returns a probability that a tested instance will belong to either the effector or non-effector class and these probabilities are included in the web server output as additional information to researchers. However, in Naive Bayes classification these are known to be only rough estimations and should therefore not be overinterpreted.
+Please note that whilst EffectorP returns a probability that a tested instance will belong to either the effector or non-effector class, these are known to be only rough estimations and should therefore not be overinterpreted.
 
 We deliberately did not recommend a probability threshold over which a protein would be classified as an effector candidate, as we believe it should remain up to the individual user to interpret their results in the context of additional resources available. For example, a researcher might like to predict the full effector candidate complement using EffectorP and overlay this with in planta expression data to prioritize candidates, whereas in other situations without additional information a list of high-priority candidates as determined by the EffectorP probabilities might be more appropriate. 
 
