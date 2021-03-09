@@ -58,7 +58,7 @@ Ensemble classification
 All done.
 
 # Identifier            Cytoplasmic effector    Apoplastic effector     Non-effector            Prediction
-AvrSr27 cytoplasmic     Y (0.834)               Y (0.697)               -                       Cytoplasmic/apoplastic effector
+AvrSr27 cytoplasmic     Y (0.697)               Y (0.834)               -                       Apoplastic/cytoplasmic effector
 AvrLm6                  -                       Y (0.758)               -                       Apoplastic effector
 HaCR1 apoplast M4BIN0   -                       Y (0.937)               -                       Apoplastic effector
 PvRXLR53 cytoplasmic    Y (0.911)               -                       -                       Cytoplasmic effector
