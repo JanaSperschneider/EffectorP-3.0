@@ -15,7 +15,7 @@ For a given set of secreted pathogen proteins, EffectorP 3.0 will predict if a p
 EffectorP is **not** a tool for secretome prediction and **not** a tool for bacterial effector prediction. 
 
 EffectorP has been trained to find fungal/oomycete effectors in secretomes, so please run it on a FASTA file of secreted proteins 
-to test if they are predicted effectors. It is recommended 
+to test if they are predicted effectors. It is **essential** 
 to use tools such as SignalP, Phobius and TMHMM	to predict first if a protein is likely to be secreted.
 Alternatively, high-confidence experimentally determined secretomes instead of computationally predicted secretomes can be submitted to EffectorP. 
 
