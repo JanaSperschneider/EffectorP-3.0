@@ -1,0 +1,58 @@
+
+Time taken to test model on training data: 0.05 seconds
+
+=== Error on training data ===
+
+Correctly Classified Instances         205               79.7665 %
+Incorrectly Classified Instances        52               20.2335 %
+Kappa statistic                          0.5102
+Mean absolute error                      0.217 
+Root mean squared error                  0.3837
+Relative absolute error                 57.8595 %
+Root relative squared error             88.7283 %
+Total Number of Instances              257     
+
+
+=== Detailed Accuracy By Class ===
+
+                 TP Rate  FP Rate  Precision  Recall   F-Measure  MCC      ROC Area  PRC Area  Class
+                 0.750    0.187    0.571      0.750    0.649      0.519    0.879     0.767     effector
+                 0.813    0.250    0.908      0.813    0.858      0.519    0.879     0.953     non-effector
+Weighted Avg.    0.798    0.234    0.824      0.798    0.806      0.519    0.879     0.907     
+
+
+=== Confusion Matrix ===
+
+   a   b   <-- classified as
+  48  16 |   a = effector
+  36 157 |   b = non-effector
+
+Time taken to perform cross-validation: 0.15 seconds
+
+
+=== Stratified cross-validation ===
+
+Correctly Classified Instances         191               74.3191 %
+Incorrectly Classified Instances        66               25.6809 %
+Kappa statistic                          0.3783
+Mean absolute error                      0.2706
+Root mean squared error                  0.4471
+Relative absolute error                 72.1173 %
+Root relative squared error            103.3673 %
+Total Number of Instances              257     
+
+
+=== Detailed Accuracy By Class ===
+
+                 TP Rate  FP Rate  Precision  Recall   F-Measure  MCC      ROC Area  PRC Area  Class
+                 0.641    0.223    0.488      0.641    0.554      0.385    0.793     0.586     effector
+                 0.777    0.359    0.867      0.777    0.820      0.385    0.793     0.897     non-effector
+Weighted Avg.    0.743    0.325    0.773      0.743    0.754      0.385    0.793     0.820     
+
+
+=== Confusion Matrix ===
+
+   a   b   <-- classified as
+  41  23 |   a = effector
+  43 150 |   b = non-effector
+
