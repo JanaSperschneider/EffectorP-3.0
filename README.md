@@ -23,11 +23,11 @@ Alternatively, high-confidence experimentally determined secretomes instead of c
 
 EffectorP has been written in Python3 and uses the WEKA 3.8.4 software. To get EffectorP to work on your local machine, you need to unzip the WEKA software, which is already provided in the EffectorP distribution to ensure that a compatible version is used. You also need an installation of Python 3.
 
-0. Download the latest release from this github repo (e.g. EffectorP_3.0.0-beta.zip) or alternatively you can clone the github repo (git clone https://github.com/JanaSperschneider/EffectorP-3.0.git) and skip step 1.
+0. Download the latest release from this github repo (e.g. EffectorP_3.0.zip) or alternatively you can clone the github repo (git clone https://github.com/JanaSperschneider/EffectorP-3.0.git) and skip step 1.
 
 1. Unpack EffectorP in your desired location
 ```
-unzip EffectorP_3.0.0-beta.zip
+unzip EffectorP_3.0.zip
 cd EffectorP-3.0
 ```
 
