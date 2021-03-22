@@ -542,7 +542,9 @@ def get_effector_predictions(ORIGINAL_IDENTIFIERS, SEQUENCES, EFFECTOR_THRESHOLD
 
     for index, (ident, seq) in enumerate(zip(ORIGINAL_IDENTIFIERS, SEQUENCES)):
 
-        short_ident = 'seq' + str(index)
+        # Be careful to use this short identifier later, 
+        # if all identifiers are equal, predictions will fail if not used
+        short_ident = 'protein' + str(index)
         yes_prob_cytoplasmic, no_prob_cytoplasmic = [], []
         yes_prob_apoplastic, no_prob_apoplastic = [], []
 
@@ -583,12 +585,12 @@ def get_effector_predictions(ORIGINAL_IDENTIFIERS, SEQUENCES, EFFECTOR_THRESHOLD
                     prediction = 'Cytoplasmic effector (apoplastic effector: ' + str(yes_prob_apoplastic) + ')'
                     prob = yes_prob_cytoplasmic
                     predicted_effectors.append((ident.strip(), yes_prob_cytoplasmic, yes_prob_apoplastic, seq))            
-                    cyto_apo_effectors[ident.strip()] = [yes_prob_cytoplasmic, yes_prob_apoplastic, seq]    
+                    cyto_apo_effectors[short_ident] = [yes_prob_cytoplasmic, yes_prob_apoplastic, seq]    
                 else:
                     prediction = 'Cytoplasmic effector'
                     prob = yes_prob_cytoplasmic
                     predicted_effectors.append((ident.strip(), yes_prob_cytoplasmic, yes_prob_apoplastic, seq))   
-                    cyto_effectors[ident.strip()] = [yes_prob_cytoplasmic, seq]              
+                    cyto_effectors[short_ident] = [yes_prob_cytoplasmic, seq]              
 
             # Is it more likely an apoplastic effector                
             if yes_prob_apoplastic > yes_prob_cytoplasmic:
@@ -597,13 +599,13 @@ def get_effector_predictions(ORIGINAL_IDENTIFIERS, SEQUENCES, EFFECTOR_THRESHOLD
                     prediction = 'Apoplastic effector (cytoplasmic effector: ' + str(yes_prob_cytoplasmic) + ')'
                     prob = yes_prob_apoplastic
                     predicted_effectors.append((ident.strip(), yes_prob_cytoplasmic, yes_prob_apoplastic, seq))     
-                    apo_cyto_effectors[ident.strip()] = [yes_prob_apoplastic, yes_prob_cytoplasmic, seq]     
+                    apo_cyto_effectors[short_ident] = [yes_prob_apoplastic, yes_prob_cytoplasmic, seq]     
 
                 else:
                     prediction = 'Apoplastic effector'
                     prob = yes_prob_apoplastic
                     predicted_effectors.append((ident.strip(), yes_prob_cytoplasmic, yes_prob_apoplastic, seq))   
-                    apo_effectors[ident.strip()] = [yes_prob_apoplastic, seq]                                  
+                    apo_effectors[short_ident] = [yes_prob_apoplastic, seq]                                  
 
         if yes_prob_cytoplasmic < EFFECTOR_THRESHOLD and yes_prob_apoplastic < EFFECTOR_THRESHOLD:
             prediction = 'Non-effector'
@@ -643,7 +645,7 @@ def get_model_predictions(WEKA_PATH, RESULTS_PATH, MODELS, CLASSIFIER, ensembl_v
         
         for index, (ident, prediction, prob, seq) in enumerate(predictions):
 
-            short_ident = 'seq' + str(index)
+            short_ident = 'protein' + str(index)
 
             if short_ident in ensembl_votes:
                 previous_predictions = ensembl_votes[short_ident] 
@@ -920,27 +922,27 @@ def short_output_screen(predictions, cyto_effectors, apo_effectors, cyto_apo_eff
     col_width = max(col_width, 10)
     pred_col_width = 20
 
-
     short_output_string = "".join("# Identifier".ljust(col_width)) + '\t' 
     short_output_string += "".join("Cytoplasmic effector".ljust(pred_col_width)) + '\t' 
     short_output_string += "".join("Apoplastic effector".ljust(pred_col_width)) + '\t' 
     short_output_string += "".join("Non-effector".ljust(pred_col_width)) + '\t' 
     short_output_string += "".join("Prediction".ljust(pred_col_width)) + '\n' 
 
-    for protein, pred, prob, sequence in predictions:    
+    for index, (protein, pred, prob, sequence) in enumerate(predictions):    
 
-        if protein in cyto_effectors:
+        short_ident = 'protein' + str(index)
+        if short_ident in cyto_effectors:
             short_output_string += "".join(protein.ljust(col_width)) + '\t' + 'Y' + ' (' + str(prob) + ')           ' + '\t' + "".join('-'.ljust(pred_col_width)) + '\t'
             short_output_string += "".join('-'.ljust(pred_col_width)) + '\t' + 'Cytoplasmic effector' + '\n'            
-        elif protein in apo_effectors:
+        elif short_ident in apo_effectors:
             short_output_string += "".join(protein.ljust(col_width)) + '\t' + "".join('-'.ljust(pred_col_width)) + '\t' + 'Y' + ' (' + str(prob) + ')           ' + '\t' 
             short_output_string += "".join('-'.ljust(pred_col_width)) + '\t' + 'Apoplastic effector' + '\n'           
-        elif protein in cyto_apo_effectors:
-            short_output_string += "".join(protein.ljust(col_width)) + '\t' + 'Y' + ' (' + str(cyto_apo_effectors[protein][0])+ ')           ' + '\t' 
-            short_output_string += 'Y' + ' (' + str(cyto_apo_effectors[protein][1]) + ')           ' + '\t' + "".join('-'.ljust(pred_col_width)) + '\t' + 'Cytoplasmic/apoplastic effector' + '\n'  
-        elif protein in apo_cyto_effectors:
-            short_output_string += "".join(protein.ljust(col_width)) + '\t' + 'Y' + ' (' + str(apo_cyto_effectors[protein][1])+ ')           ' + '\t' 
-            short_output_string += 'Y' + ' (' + str(apo_cyto_effectors[protein][0]) + ')           ' + '\t' + "".join('-'.ljust(pred_col_width)) + '\t' + 'Apoplastic/cytoplasmic effector' + '\n'  
+        elif short_ident in cyto_apo_effectors:
+            short_output_string += "".join(protein.ljust(col_width)) + '\t' + 'Y' + ' (' + str(cyto_apo_effectors[short_ident][0])+ ')           ' + '\t' 
+            short_output_string += 'Y' + ' (' + str(cyto_apo_effectors[short_ident][1]) + ')           ' + '\t' + "".join('-'.ljust(pred_col_width)) + '\t' + 'Cytoplasmic/apoplastic effector' + '\n'  
+        elif short_ident in apo_cyto_effectors:
+            short_output_string += "".join(protein.ljust(col_width)) + '\t' + 'Y' + ' (' + str(apo_cyto_effectors[short_ident][1])+ ')           ' + '\t' 
+            short_output_string += 'Y' + ' (' + str(apo_cyto_effectors[short_ident][0]) + ')           ' + '\t' + "".join('-'.ljust(pred_col_width)) + '\t' + 'Apoplastic/cytoplasmic effector' + '\n'  
         else:
             short_output_string += "".join(protein.ljust(col_width)) + '\t' + "".join('-'.ljust(pred_col_width)) + '\t' + "".join('-'.ljust(pred_col_width)) + '\t' 
             short_output_string += 'Y' + ' (' + str(prob) + ')           ' + '\t' + 'Non-effector' + '\n'  
@@ -965,20 +967,22 @@ def short_output_file(predictions, cyto_effectors, apo_effectors, cyto_apo_effec
     short_output_string += "Non-effector" + '\t' 
     short_output_string += "Prediction" + '\n' 
 
-    for protein, pred, prob, sequence in predictions:    
+    for index, (protein, pred, prob, sequence) in enumerate(predictions):    
 
-        if protein in cyto_effectors:
+        short_ident = 'protein' + str(index)
+        
+        if short_ident in cyto_effectors:
             short_output_string += protein + '\t' + 'Y' + ' (' + str(prob) + ')' + '\t' + '-' + '\t'
             short_output_string += '-' + '\t' + 'Cytoplasmic effector' + '\n'            
-        elif protein in apo_effectors:
+        elif short_ident in apo_effectors:
             short_output_string += protein + '\t' + '-' + '\t' + 'Y' + ' (' + str(prob) + ')' + '\t' 
             short_output_string += '-' + '\t' + 'Apoplastic effector' + '\n'           
-        elif protein in cyto_apo_effectors:
-            short_output_string += protein + '\t' + 'Y' + ' (' + str(cyto_apo_effectors[protein][0]) + ')' + '\t' 
-            short_output_string += 'Y' + ' (' + str(cyto_apo_effectors[protein][1]) + ')' + '\t' + '-' + '\t' + 'Cytoplasmic/apoplastic effector' + '\n'  
-        elif protein in apo_cyto_effectors:
-            short_output_string += protein + '\t' + 'Y' + ' (' + str(apo_cyto_effectors[protein][1]) + ')' + '\t' 
-            short_output_string += 'Y' + ' (' + str(apo_cyto_effectors[protein][0]) + ')' + '\t' + '-' + '\t' + 'Apoplastic/cytoplasmic effector' + '\n'  
+        elif short_ident in cyto_apo_effectors:
+            short_output_string += protein + '\t' + 'Y' + ' (' + str(cyto_apo_effectors[short_ident][0]) + ')' + '\t' 
+            short_output_string += 'Y' + ' (' + str(cyto_apo_effectors[short_ident][1]) + ')' + '\t' + '-' + '\t' + 'Cytoplasmic/apoplastic effector' + '\n'  
+        elif short_ident in apo_cyto_effectors:
+            short_output_string += protein + '\t' + 'Y' + ' (' + str(apo_cyto_effectors[short_ident][1]) + ')' + '\t' 
+            short_output_string += 'Y' + ' (' + str(apo_cyto_effectors[short_ident][0]) + ')' + '\t' + '-' + '\t' + 'Apoplastic/cytoplasmic effector' + '\n'  
         else:
             short_output_string += protein + '\t' + '-' + '\t' + '-' + '\t' 
             short_output_string += 'Y' + ' (' + str(prob) + ')' + '\t' + 'Non-effector' + '\n'  

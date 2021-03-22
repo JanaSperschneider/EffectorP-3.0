@@ -171,16 +171,16 @@ print('-----------------')
 if effector_output:
     with open(effector_output, 'w') as f_output:
         for effector, prob_cytoplasmic, prob_apoplastic, sequence in predicted_effectors:
-            if effector in apo_effectors:
+            if prob_apoplastic >= EFFECTOR_THRESHOLD and prob_cytoplasmic < EFFECTOR_THRESHOLD:
                 f_output.writelines('>' + effector + ' | Apoplastic effector probability: ' + str(prob_apoplastic) + '\n')
                 f_output.writelines(sequence + '\n')  
-            if effector in apo_cyto_effectors:
+            if prob_apoplastic >= EFFECTOR_THRESHOLD and prob_cytoplasmic >= EFFECTOR_THRESHOLD and prob_apoplastic > prob_cytoplasmic:
                 f_output.writelines('>' + effector + ' | Apoplastic effector probability: ' + str(prob_apoplastic) + ' | Cytoplasmic effector probability: ' + str(prob_cytoplasmic) + '\n')
                 f_output.writelines(sequence + '\n')                 
-            if effector in cyto_effectors:
+            if prob_cytoplasmic >= EFFECTOR_THRESHOLD and prob_apoplastic < EFFECTOR_THRESHOLD:
                 f_output.writelines('>' + effector + ' | Cytoplasmic effector probability: ' + str(prob_cytoplasmic) + '\n')
                 f_output.writelines(sequence + '\n')  
-            if effector in cyto_apo_effectors:
+            if prob_cytoplasmic >= EFFECTOR_THRESHOLD and prob_apoplastic >= EFFECTOR_THRESHOLD and prob_cytoplasmic >= prob_apoplastic:
                 f_output.writelines('>' + effector + ' | Cytoplasmic effector probability: ' + str(prob_cytoplasmic) + ' | Apoplastic effector probability: ' + str(prob_apoplastic) + '\n')
                 f_output.writelines(sequence + '\n')  
 
