@@ -96,4 +96,4 @@ We deliberately did not recommend a probability threshold over which a protein w
 
 #### Citation for EffectorP 
 
-Preprint in preparation...
+Preprint available at [biorxiv](https://www.biorxiv.org/content/10.1101/2021.07.28.454080v1).
