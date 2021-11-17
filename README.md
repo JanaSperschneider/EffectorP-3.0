@@ -96,4 +96,8 @@ We deliberately did not recommend a probability threshold over which a protein w
 
 #### Citation for EffectorP 
 
-Preprint available at [biorxiv](https://www.biorxiv.org/content/10.1101/2021.07.28.454080v1).
+Please cite the EffectorP 3.0 paper as follows:
+
+Sperschneider J, Dodds P. EffectorP 3.0: prediction of apoplastic and cytoplasmic effectors in fungi and oomycetes. Mol Plant Microbe Interact. 2021. [doi: 10.1094/MPMI-08-21-0201-R]
+
+Preprint also available at [biorxiv](https://www.biorxiv.org/content/10.1101/2021.07.28.454080v1).
