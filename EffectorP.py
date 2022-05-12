@@ -88,7 +88,7 @@ except OSError as exception:
 ORIGINAL_IDENTIFIERS, SEQUENCES = [], []
 for identifier, sequence in functions.SimpleFastaParser(open(FASTA_FILE, 'r')):
   ORIGINAL_IDENTIFIERS.append(identifier)
-  SEQUENCES.append(sequence.rstrip("*"))
+  SEQUENCES.append(sequence.replace('*',''))
 
 SEQUENCES = [seq.upper() for seq in SEQUENCES]
 # -----------------------------------------------------------------------------------------------------------
